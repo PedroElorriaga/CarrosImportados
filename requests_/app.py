@@ -11,6 +11,7 @@ import os
 current = os.getcwd()
 appRoaming = True
 roamingType = None
+log_info = ''
 
 # BUSCA O API DO SERVER CONECTADO
 def get_request():
@@ -20,17 +21,60 @@ def get_request():
 
 # CRIA UM NOVO DADO NO BD
 def post_request():
-    x = '{"ano" : "c_ano", "cor" : "c_cor", "marca" : "c_marca", "modelo" : "c_modelo"}'
-    info = x.replace("c_ano", input("Digite o ano do veiculo: ")).replace("c_cor", 
-    input("Digite a cor do veiculo: ")).replace("c_marca", input("Digite a marca do veiculo: ")).replace("c_modelo", 
-    input("Digite o modelo do veiculo: "))
-    response = requests.post('https://basecarros-98462-default-rtdb.firebaseio.com/.json', data=info)
-    separador()
-    print('Criado com sucesso!')
-    separador()
-    arquivo_json()
-    arquivo_log()
-    return response
+    if roamingType == 'DEV':
+        x = '{"ano" : "c_ano", "cor" : "c_cor", "marca" : "c_marca", "modelo" : "c_modelo"}'
+        info = x.replace("c_ano", input("Digite o ano do veiculo: ")).replace("c_cor", 
+        input("Digite a cor do veiculo: ")).replace("c_marca", input("Digite a marca do veiculo: ")).replace("c_modelo", 
+        input("Digite o modelo do veiculo: "))
+        response = requests.post('https://basecarros-98462-default-rtdb.firebaseio.com/.json', data=info)
+        separador()
+        print('Criado com sucesso!')
+        separador()
+        arquivo_json()
+        arquivo_log()
+        return response
+
+    # INTERFACE DE INCLUSÃO
+    elif roamingType == None:
+        def send_data():
+            ano_entry = ano.get()
+            cor_entry = cor.get()
+            marca_entry = marca.get()
+            modelo_entry = modelo.get()
+            x = '{"ano" : "c_ano", "cor" : "c_cor", "marca" : \
+            "c_marca", "modelo" : "c_modelo"}'
+            info = x.replace("c_ano", ano_entry).replace("c_cor", cor_entry)\
+            .replace("c_marca", marca_entry).replace("c_modelo", modelo_entry)
+            response = requests.post('https://basecarros-98462-default-rtdb.firebaseio.com/.json', data=info)
+            arquivo_json()
+            arquivo_log('post_request()')
+
+            return response
+            
+        width = 350
+        heigth = 450
+        root = customtkinter.CTkToplevel()
+        root.geometry(f"{width}x{heigth}+250+300")
+        root.wm_resizable(False, False)
+        root.title("Base de dados")
+
+        frame = customtkinter.CTkFrame(root)
+        frame.pack(pady=10, padx=50, fill="both", expand=True)
+        customtkinter.CTkLabel(frame, text="Informe o ano:", font=("Arial",14), width=100).pack(pady= 2)
+        ano = customtkinter.CTkEntry(frame, placeholder_text="Digite o ano", font=("Roboto", 12))
+        ano.pack(pady=5)
+        customtkinter.CTkLabel(frame, text="Informe a cor:", font=("Arial",14)).pack(pady= 2)
+        cor = customtkinter.CTkEntry(frame, placeholder_text="Digite a cor", font=("Roboto", 12))
+        cor.pack(pady=5)
+        customtkinter.CTkLabel(frame, text="Informe a marca:", font=("Arial",14)).pack(pady= 2)
+        marca = customtkinter.CTkEntry(frame, placeholder_text="Digite a marca", font=("Roboto", 12))
+        marca.pack(pady=5)
+        customtkinter.CTkLabel(frame, text="Informe o modelo:", font=("Arial",14)).pack(pady= 2)
+        modelo = customtkinter.CTkEntry(frame, placeholder_text="Digite o modelo", font=("Roboto", 12))
+        modelo.pack(pady=5)
+
+        customtkinter.CTkButton(frame, text="Incluir", font=("Roboto",14), command=send_data).pack(pady=15)
+        customtkinter.CTkLabel(frame, text="Direitos reservados para PedroElorriaga ©", font=("Roboto", 8)).pack(pady=40)
 
 
 # EXIBE OS DADOS DO BANCO DE DADOS
@@ -41,38 +85,39 @@ def exibir_detalhe():
             print(k)
             for i, v in val.items():
                 print(f'\t{i}: {v}')
+
     # INTERFACE DE EXIBIÇÃO
     elif roamingType == None:
         with open(current+'/ArquivoJson.json', 'r') as arqv:
             exibir = json.load(arqv)
 
-    customtkinter.set_appearance_mode("system")
-    customtkinter.set_default_color_theme("green")
-    width = 350
-    heigth = 400
-    root = customtkinter.CTk()
-    root.geometry(f"{width}x{heigth}+550+200")
-    root.title("Base de dados")
+        customtkinter.set_appearance_mode("system")
+        customtkinter.set_default_color_theme("green")
+        width = 350
+        heigth = 400
+        root = customtkinter.CTkToplevel()
+        root.geometry(f"{width}x{heigth}+750+150")
+        root.wm_resizable(False, False)
+        root.title("Base de dados")
 
-    frame = customtkinter.CTkFrame(root)
-    frame.pack(pady=10, padx=50, fill="both", expand=True)
-    customtkinter.CTkLabel(frame, text="Detalhes", font=("Roboto", 20, "bold")).pack(pady=30)
-    canvaa = customtkinter.CTkCanvas(frame)
-    canvaa.pack(padx=5, pady=3, ipadx=5)
-    scroll_bar = Scrollbar(canvaa, orient="vertical")
-    scroll_bar.pack(side=RIGHT, fill=Y, padx=2, pady=8)
-    text = Text(canvaa, yscrollcommand=scroll_bar.set, font=("Roboto", 12))
+        frame = customtkinter.CTkFrame(root)
+        frame.pack(pady=10, padx=50, fill="both", expand=True)
+        customtkinter.CTkLabel(frame, text="Detalhes", font=("Roboto", 20, "bold")).pack(pady=30)
+        #canvaa = customtkinter.CTkCanvas(frame)
+        #canvaa.pack(padx=5, pady=3, ipadx=5)
+        text = customtkinter.CTkTextbox(frame, font=("Roboto", 12))
 
-    for chave, valor in exibir.items():
-        exibirChave = f"Key: {chave}\n"
-        text.insert(END, exibirChave)
-        #customtkinter.CTkLabel(canvaa, text=exibirChave).pack()
-        for k,v in valor.items():
-            exibirLabel = f"\t{k}: {v}\n"
-            text.insert(END, exibirLabel)
+        for chave, valor in exibir.items():
+            exibirChave = f"Key: {chave}\n\n"
+            text.insert(END, exibirChave)
+            #customtkinter.CTkLabel(canvaa, text=exibirChave).pack()
+            for k,v in valor.items():
+                exibirLabel = f"   {k}: {v}\n\n"
+                text.insert(END, exibirLabel)
 
-    text.pack(padx=5, pady=5)
-            #customtkinter.CTkLabel(canvaa, text=exibirLabel).pack(fill="both", expand=True)
+        text.pack(padx=2, pady=5)
+        customtkinter.CTkLabel(frame, text="Direitos reservados para PedroElorriaga ©", font=("Roboto", 8)).pack(pady=30)
+                #customtkinter.CTkLabel(canvaa, text=exibirLabel).pack(fill="both", expand=True)
     
 
 # ATUALIZA DO DADOS NO BD
@@ -142,7 +187,7 @@ def arquivo_json():
 
 
 # CRIA LOG DE MODIFICAÇÃO
-def arquivo_log():
+def arquivo_log(log_info=None):
     data = datetime.now()
     dataFormat = datetime.strftime(data, '%d/%m/%Y ' '%H:%M:%S')
     if roamingType == 'DEV':
@@ -150,7 +195,7 @@ def arquivo_log():
             arqv.write(f'Ultima modificação --> {dataFormat} {requisicao}\n')
     else:
         with open(current + '/logs.txt', 'a') as arqv:
-            arqv.write(f'Ultima modificação --> {dataFormat} TESTE\n')
+            arqv.write(f'Ultima modificação --> {dataFormat} {log_info}\n')
 
 
 # GERA UM SEPARADOR '-'
@@ -235,5 +280,3 @@ if __name__ == "__main__":
         else:
             appRoaming = False
 
-
-# INTERFACE GRÁFICA
