@@ -48,6 +48,7 @@ def post_request():
             response = requests.post('https://basecarros-98462-default-rtdb.firebaseio.com/.json', data=info)
             arquivo_json()
             arquivo_log('post_request()')
+            customtkinter.CTkLabel(frame, text="Dados atualizados com sucesso!", text_color="green", font=("arial", 12, "bold")).pack()
 
             return response
             
@@ -74,11 +75,11 @@ def post_request():
         modelo.pack(pady=5)
 
         customtkinter.CTkButton(frame, text="Incluir", font=("Roboto",14), command=send_data).pack(pady=15)
-        customtkinter.CTkLabel(frame, text="Direitos reservados para PedroElorriaga ©", font=("Roboto", 8)).pack(pady=40)
 
 
 # EXIBE OS DADOS DO BANCO DE DADOS
 def exibir_detalhe():
+    arquivo_json()
     if roamingType == 'DEV':
         teste = get_request()
         for k, val in teste.items():
@@ -105,7 +106,7 @@ def exibir_detalhe():
         customtkinter.CTkLabel(frame, text="Detalhes", font=("Roboto", 20, "bold")).pack(pady=30)
         #canvaa = customtkinter.CTkCanvas(frame)
         #canvaa.pack(padx=5, pady=3, ipadx=5)
-        text = customtkinter.CTkTextbox(frame, font=("Roboto", 12))
+        text = customtkinter.CTkTextbox(frame, font=("Roboto", 11))
 
         for chave, valor in exibir.items():
             exibirChave = f"Key: {chave}\n\n"
@@ -121,22 +122,64 @@ def exibir_detalhe():
     
 
 # ATUALIZA DO DADOS NO BD
-def patch_request(link, key, value):
-    tokenResponse = get_request()
-    if link in tokenResponse:
-        x = '{"chave" : "valor"}'
-        info = x.replace("chave", f"{key}").replace("valor", f"{value}")
-        response = requests.patch(f"https://basecarros-98462-default-rtdb.firebaseio.com/{link}.json", data=info)
-        separador()
-        print('Atualizado com sucesso!')
-        separador()
-        exibir_detalhe()
-        arquivo_json()
-        arquivo_log()
-        return response
-    else:
-        print()
-        print('Link não encontrado!')
+def patch_request(link=None, key=None, value=None):
+    if roamingType == 'DEV':
+        tokenResponse = get_request()
+        if link in tokenResponse:
+            x = '{"chave" : "valor"}'
+            info = x.replace("chave", f"{key}").replace("valor", f"{value}")
+            response = requests.patch(f"https://basecarros-98462-default-rtdb.firebaseio.com/{link}.json", data=info)
+            separador()
+            print('Atualizado com sucesso!')
+            separador()
+            exibir_detalhe()
+            arquivo_json()
+            arquivo_log()
+            return response
+        else:
+            print()
+            print('Link não encontrado!')
+
+    elif roamingType == None:
+        def update_data():
+            tokenResponse = get_request()
+            key_entry = key.get()
+            if key_entry in tokenResponse:
+                colum_entry = colum.get()
+                valor_entry = valor.get()
+                x = '{"chave" : "valor"}'
+                info = x.replace("chave", f"{colum_entry}").replace("valor", f"{valor_entry}")
+                response = requests.patch(f"https://basecarros-98462-default-rtdb.firebaseio.com/{key_entry}.json", data=info)
+                arquivo_json()
+                arquivo_log('patch_request()')
+                customtkinter.CTkLabel(frame, text="Dados atualizados com sucesso!", text_color="green", font=("arial", 12, "bold")).pack()
+                
+                return response            
+            else:
+                print('Link não encontrado')
+
+                
+        width = 350
+        heigth = 450
+        root = customtkinter.CTkToplevel()
+        root.geometry(f"{width}x{heigth}+250+300")
+        root.wm_resizable(False, False)
+        root.title("Base de dados")
+
+        frame = customtkinter.CTkFrame(root)
+        frame.pack(pady=10, padx=50, fill="both", expand=True)
+        customtkinter.CTkLabel(frame, text="Atualizar", font=("Roboto",20, "bold")).pack(pady=20)
+        customtkinter.CTkLabel(frame, text="Informe a KEY:", font=("Arial",14)).pack(pady= 2)
+        key = customtkinter.CTkEntry(frame, placeholder_text="Digite a key", font=("Roboto", 12))
+        key.pack(pady=5)
+        customtkinter.CTkLabel(frame, text="Informe a coluna:", font=("Arial",14)).pack(pady= 2)
+        colum = customtkinter.CTkEntry(frame, placeholder_text="Digite a coluna", font=("Roboto", 12))
+        colum.pack(pady=5)
+        customtkinter.CTkLabel(frame, text="Informe o novo valor:", font=("Arial",14)).pack(pady= 2)
+        valor = customtkinter.CTkEntry(frame, placeholder_text="Digite o valor", font=("Roboto", 12))
+        valor.pack(pady=5)
+
+        customtkinter.CTkButton(frame, text="Incluir", font=("Roboto",14), command=update_data).pack(pady=15)
 
 
 # DELETA OS DADOS NO BD
