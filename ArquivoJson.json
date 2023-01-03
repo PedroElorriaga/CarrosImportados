@@ -9,7 +9,7 @@
         "ano": "2021",
         "cor": "Orange lava",
         "marca": "Porsche",
-        "modelo": "911 carrera s"
+        "modelo": "911 Carrera"
     },
     "-NJDDWcfhw-zldxe0ze_": {
         "ano": "2020",
@@ -19,7 +19,7 @@
     },
     "-NJKsx9BVwblH2sx7Enj": {
         "ano": "2020",
-        "cor": "All black",
+        "cor": "Black",
         "marca": "BMW",
         "modelo": "X6 Competition"
     },
@@ -34,5 +34,23 @@
         "cor": "Red",
         "marca": "Mercedes",
         "modelo": "GLA 200"
+    },
+    "-NKcbwnh-VwPdqLDaFvM": {
+        "ano": "2023",
+        "cor": "Verde pitao",
+        "marca": "Porsche",
+        "modelo": "911 Carrera S"
+    },
+    "-NKnfU62H6FdS6DmhlG-": {
+        "ano": "2018",
+        "cor": "Red",
+        "marca": "Land Rover",
+        "modelo": "Range rover evoque"
+    },
+    "-NKoqZ7OBJ5Z_weL8tZ-": {
+        "ano": "2019",
+        "cor": "White",
+        "marca": "Jaguar",
+        "modelo": "F-Peace"
     }
 }
