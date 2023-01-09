@@ -1,5 +1,5 @@
 # IMPORTAÇÕES DE LIBS
-import json, requests
+import json, requests, time
 from time import sleep
 from infos import dados, dadoExibicao
 from datetime import datetime, timedelta
@@ -13,11 +13,11 @@ appRoaming = True
 roamingType = None
 log_info = ''
 
+
 # BUSCA O API DO SERVER CONECTADO
 def get_request():
     response = requests.get('https://basecarros-98462-default-rtdb.firebaseio.com/.json')
     return response.json()
-
 
 # CRIA UM NOVO DADO NO BD
 def post_request():
@@ -140,6 +140,7 @@ def patch_request(link=None, key=None, value=None):
             print()
             print('Link não encontrado!')
 
+    #Ajustar bug de criar nova chave quando nao tiver --- Working
     elif roamingType == None:
         def update_data():
             tokenResponse = get_request()
@@ -147,16 +148,42 @@ def patch_request(link=None, key=None, value=None):
             if key_entry in tokenResponse:
                 colum_entry = colum.get()
                 valor_entry = valor.get()
-                x = '{"chave" : "valor"}'
-                info = x.replace("chave", f"{colum_entry}").replace("valor", f"{valor_entry}")
-                response = requests.patch(f"https://basecarros-98462-default-rtdb.firebaseio.com/{key_entry}.json", data=info)
-                arquivo_json()
-                arquivo_log('patch_request()')
-                customtkinter.CTkLabel(frame, text="Dados atualizados com sucesso!", text_color="green", font=("arial", 12, "bold")).pack()
+                for key_tk, value_tk in tokenResponse.items():
+                    if colum_entry in value_tk:
+                        x = '{"chave" : "valor"}'
+                        info = x.replace("chave", f"{colum_entry}").replace("valor", f"{valor_entry}")
+                        response = requests.patch(f"https://basecarros-98462-default-rtdb.firebaseio.com/{key_entry}.json", data=info)
+                        arquivo_json()
+                        arquivo_log('patch_request()')
+                        customtkinter.CTkLabel(frame, text="Dados atualizados com sucesso!", text_color="green", font=("arial", 12, "bold")).pack()
+                        no_find_value = False
+                        return response 
+                    else:
+                        no_find_value = True
                 
-                return response            
+                #Exibe mensagem de não encontrado
+                if no_find_value == True:
+                    def exit_buttom():
+                            messagebox.destroy()
+                            return messagebox
+
+                    messagebox = customtkinter.CTkToplevel()
+                    messagebox.geometry("250x150+300+400")
+                    messagebox.title("Alerta")
+                    customtkinter.CTkLabel(messagebox, text="Chave não encontrada").pack(pady=30)
+                    customtkinter.CTkButton(messagebox, command=exit_buttom, text="Ok").pack()
+
+            #Exibe mensagem de não encontrado
             else:
-                print('Link não encontrado')
+                def exit_buttom():
+                            messagebox.destroy()
+                            return messagebox
+
+                messagebox = customtkinter.CTkToplevel()
+                messagebox.geometry("250x150+300+400")
+                messagebox.title("Alerta")
+                customtkinter.CTkLabel(messagebox, text="Link não encontrado").pack(pady=30)
+                customtkinter.CTkButton(messagebox, command=exit_buttom, text="Ok").pack()
 
                 
         width = 350
@@ -202,21 +229,23 @@ def delete_request(link=None):
             print()
             print('Nenhum valor digitado!')
     elif roamingType == None:
-        #CRIAR CONDIÇÃO DE EXE DA INTERFACE
-        if link == None:
-            link = input('Digite o link: ')
-            tokenResponse = get_request()
-            if link in tokenResponse:
-                response = requests.delete(f"https://basecarros-98462-default-rtdb.firebaseio.com/{link}.json")
-                separador()
-                print('Deletado com sucesso!')
-                separador()
-                arquivo_json()
-                arquivo_log()
-                return response
-            else:
-                print()
-                print('Link não encontrado!')
+        def del_data():
+            if link is not None:
+                tokenResponse = get_request()
+                if link in tokenResponse:
+                    response
+
+        width = 350
+        heigth = 450
+        root = customtkinter.CTkToplevel()
+        root.geometry(f"{width}x{heigth}+250+300")
+        root.wm_resizable(False, False)
+        root.title("Base de dados")
+
+        frame = customtkinter.CTkFrame(root)
+        frame.pack(pady=10, padx=50, fill="both", expand=True)
+        customtkinter.CTkLabel(frame, text="Deletar", font=("Roboto", 20, "bold")).pack(pady=30)
+        customtkinter.CTkLabel(frame, text="Informe a KEY:", font=("Arial",14)).pack(pady= 2)
 
 
 # TRANSFORMA AQRUIVO EM JSON
