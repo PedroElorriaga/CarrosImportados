@@ -61,6 +61,7 @@ def post_request():
 
         frame = customtkinter.CTkFrame(root)
         frame.pack(pady=10, padx=50, fill="both", expand=True)
+        customtkinter.CTkLabel(frame, text=" ").pack(pady=10)
         customtkinter.CTkLabel(frame, text="Informe o ano:", font=("Arial",14), width=100).pack(pady= 2)
         ano = customtkinter.CTkEntry(frame, placeholder_text="Digite o ano", font=("Roboto", 12))
         ano.pack(pady=5)
@@ -97,7 +98,7 @@ def exibir_detalhe():
         width = 350
         heigth = 400
         root = customtkinter.CTkToplevel()
-        root.geometry(f"{width}x{heigth}+750+150")
+        root.geometry(f"{width}x{heigth}+950+150")
         root.wm_resizable(False, False)
         root.title("Base de dados")
 
@@ -230,22 +231,63 @@ def delete_request(link=None):
             print('Nenhum valor digitado!')
     elif roamingType == None:
         def del_data():
+            key_entry = key.get()
+            link = key_entry
             if link is not None:
                 tokenResponse = get_request()
                 if link in tokenResponse:
-                    response
+                    def delete_duo_check():
+                        ...
+                    messagebox = customtkinter.CTkToplevel()
+                    messagebox.geometry("250x150+300+400")
+                    messagebox.wm_resizable(False, False)
+                    messagebox.title("Duo Check")
+                    customtkinter.CTkLabel(messagebox, text="Tem certeza disso?", font=("Roboto",18, "bold")).pack(pady=25)
+                    customtkinter.CTkButton(messagebox, text="Sim", height=10, width=120).pack(side=LEFT, padx=2)
+                    customtkinter.CTkButton(messagebox, text="Não", height=10, width=120).pack(side=RIGHT, padx=2)
+                    if link == 'Teste':
+                        response = requests.delete(f"https://basecarros-98462-default-rtdb.firebaseio.com/{link}.json")
+                        print('Deletado com sucesso')
+                        arquivo_json()
+                        arquivo_log()
+                        return response
+                else:
+                    def exit_buttom():
+                        messagebox.destroy()
+                        return messagebox
+
+                    messagebox = customtkinter.CTkToplevel()
+                    messagebox.geometry("250x150+300+400")
+                    messagebox.title("Alerta")
+                    customtkinter.CTkLabel(messagebox, text="Link não encontrado").pack(pady=30)
+                    customtkinter.CTkButton(messagebox, command=exit_buttom, text="Ok").pack()
+            else:
+                def exit_buttom():
+                        messagebox.destroy()
+                        return messagebox
+
+                messagebox = customtkinter.CTkToplevel()
+                messagebox.geometry("250x150+300+400")
+                messagebox.title("Alerta")
+                customtkinter.CTkLabel(messagebox, text="Campo Key em branco").pack(pady=30)
+                customtkinter.CTkButton(messagebox, command=exit_buttom, text="Ok").pack()
 
         width = 350
         heigth = 450
         root = customtkinter.CTkToplevel()
-        root.geometry(f"{width}x{heigth}+250+300")
+        root.geometry(f"{width}x{heigth}+250+270")
         root.wm_resizable(False, False)
         root.title("Base de dados")
 
         frame = customtkinter.CTkFrame(root)
         frame.pack(pady=10, padx=50, fill="both", expand=True)
-        customtkinter.CTkLabel(frame, text="Deletar", font=("Roboto", 20, "bold")).pack(pady=30)
+        customtkinter.CTkLabel(frame, text="Deletar", font=("Roboto", 20, "bold")).pack(pady=50)
         customtkinter.CTkLabel(frame, text="Informe a KEY:", font=("Arial",14)).pack(pady= 2)
+        key = customtkinter.CTkEntry(frame, placeholder_text="Digite a key", font=("Roboto", 12))
+        key.pack(pady=5)
+
+        customtkinter.CTkButton(frame, command=del_data, text="Confirmar").pack(pady=10)
+        #customtkinter.CTkLabel(frame, text="Direitos reservados para PedroElorriaga ©", font=("Roboto", 8)).pack(pady=80)
 
 
 # TRANSFORMA AQRUIVO EM JSON
