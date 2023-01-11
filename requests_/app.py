@@ -141,7 +141,7 @@ def patch_request(link=None, key=None, value=None):
             print()
             print('Link não encontrado!')
 
-    #Ajustar bug de criar nova chave quando nao tiver --- Working
+    #INTERFACE DE ATUALIZAÇÃO
     elif roamingType == None:
         def update_data():
             tokenResponse = get_request()
@@ -229,6 +229,8 @@ def delete_request(link=None):
         else:
             print()
             print('Nenhum valor digitado!')
+
+    #INTERFACE DE EXCLUSÃO
     elif roamingType == None:
         def del_data():
             key_entry = key.get()
@@ -237,20 +239,32 @@ def delete_request(link=None):
                 tokenResponse = get_request()
                 if link in tokenResponse:
                     def delete_duo_check():
-                        ...
+                        response = requests.delete(f"https://basecarros-98462-default-rtdb.firebaseio.com/{link}.json")
+                        arquivo_json()
+                        arquivo_log('delete_request()')
+                        confirmbox = customtkinter.CTkToplevel()
+                        confirmbox.geometry("150x100+350+400")
+                        confirmbox.title("Confirmation")
+                        def exit_confirm():
+                            confirmbox.destroy()
+                            exit_buttom()
+                        customtkinter.CTkLabel(confirmbox, text="Excluido com sucesso!").pack(pady=10)
+                        customtkinter.CTkButton(confirmbox, text="OK", command=exit_confirm).pack()
+                        
+                        return response
+                    
+                    def exit_buttom():
+                        messagebox.destroy()
+                        return messagebox
+
                     messagebox = customtkinter.CTkToplevel()
                     messagebox.geometry("250x150+300+400")
                     messagebox.wm_resizable(False, False)
                     messagebox.title("Duo Check")
                     customtkinter.CTkLabel(messagebox, text="Tem certeza disso?", font=("Roboto",18, "bold")).pack(pady=25)
-                    customtkinter.CTkButton(messagebox, text="Sim", height=10, width=120).pack(side=LEFT, padx=2)
-                    customtkinter.CTkButton(messagebox, text="Não", height=10, width=120).pack(side=RIGHT, padx=2)
-                    if link == 'Teste':
-                        response = requests.delete(f"https://basecarros-98462-default-rtdb.firebaseio.com/{link}.json")
-                        print('Deletado com sucesso')
-                        arquivo_json()
-                        arquivo_log()
-                        return response
+                    customtkinter.CTkButton(messagebox, text="Sim", command=delete_duo_check, height=10, width=120).pack(side=LEFT, padx=2)
+                    customtkinter.CTkButton(messagebox, text="Não", height=10, command=exit_buttom, width=120).pack(side=RIGHT, padx=2)
+                
                 else:
                     def exit_buttom():
                         messagebox.destroy()
