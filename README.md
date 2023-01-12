@@ -24,7 +24,8 @@
 
 <h2 align="center">:hammer: Como utilizar ?</h2>
 
-<p align="center"><a id="" /></p>
+<p align="center">Como ainda é uma fonte BETA, ainda não foi desenvolvido um .exe, sendo assim devemos executar de forma manual acessando o código "interface.py" <a href="https://github.com/PedroElorriaga/CarrosImportados/blob/main/requests_/interface.py">Interface.py</a>, porém ainda precisa ser feito mais uma tarefa</p>
+<p align="left"></p>
 
 <ul align="center">
 <img width="335" alt="Interface-base" src="https://user-images.githubusercontent.com/109704540/212161974-5f0a010d-9e14-4665-8f7a-18d7392adff0.png">
