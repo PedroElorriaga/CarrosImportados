@@ -9,6 +9,19 @@
 
 <p align="center">OBS: Isto é apenas para agregar e praticar meus conhecimentos na linguagem, podendo conter erros, quebras de normas, falhas de segurança, entre outras coisas</p>
 
+<h3 align="left">LIBS usadas neste projeto</h3>
+<ul>
+     <li>
+          <p>TKINTER</p>
+     </li>
+     <li>
+          <p>CUSTOMTKINTER</p>
+     </li>
+     <li>
+          <p>REQUESTST</p>
+     </li>
+</ul>
+
 <ul align="center">
 <img width="335" alt="Interface-base" src="https://user-images.githubusercontent.com/109704540/212161974-5f0a010d-9e14-4665-8f7a-18d7392adff0.png">
 </ul>
