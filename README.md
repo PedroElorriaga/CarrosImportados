@@ -38,7 +38,7 @@
           <p>e deverá repetir o mesmo procedimento para o REQUESTS escrevendo <b>pip install requests</b> e por fim o TKINTER <b>pip install tkinter</b></p>
      </li>
      <li>
-          <p>Por ultimo, apenas execute o programa e ele abrirá uma tela semelhante a essa abaixo:</p>
+          <p>Por ultimo, apenas execute o programa e ele abrirá uma interface semelhante a essa abaixo:</p>
      </li>
 </ul>
 
@@ -48,5 +48,24 @@
 <img width="335" alt="Interface-base" src="https://user-images.githubusercontent.com/109704540/212161974-5f0a010d-9e14-4665-8f7a-18d7392adff0.png">
 </ul>
 
+<ul>
+     <li>
+          <p>Ao cliclar em detalhes o programa exibirá todos os dados do banco da FIREBASE</p>
+          <ul align="center">
+          <img width="335" alt="Interface-base" src="https://user-images.githubusercontent.com/109704540/212349234-befbaf1e-2170-41fc-a1cb-c7da4c8ab1d1.png">
+          </ul>
+     </li>
+</ul>
+
+<ul>
+     <li>
+          <p>Voltando a janela principal, clicando no incluir novo abrirá uma janela em que você deve inserir as informações do carro novo</p>
+          <ul align="center">
+          <img width="335" alt="Incluir-base" src="https://user-images.githubusercontent.com/109704540/212381802-61e5c068-7f1a-4484-a017-534e1ecb76ce.png">
+          </ul>
+     </li>
+</ul>
 em desenvolvimento...
 @pedro_elorriaga
+
+
