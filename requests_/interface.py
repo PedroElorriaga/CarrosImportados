@@ -1,7 +1,8 @@
-import tkinter
+import tkinter, os
 import customtkinter
 from app import *
 
+os.system('cls')
 customtkinter.set_appearance_mode("system")
 customtkinter.set_default_color_theme("green")
 width = 450
