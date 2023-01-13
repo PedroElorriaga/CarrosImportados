@@ -28,13 +28,17 @@
 
 <ul align="left">
      <li>
-          <p>Primeiro devemos ter o Python instalado na máquina, caso não o tenha instalado siga as instruções no link a seguir <a href="https://www.hashtagtreinamentos.com/como-baixar-python?gclid=Cj0KCQiA_P6dBhD1ARIsAAGI7HBNikzYidO8Df-hIeCEIxotmy4aqcLfHNJDOjypBO_7Lsno2eb21x4aAiY5EALw_wcB">Link</a></p>
+          <p>Primeiro, devemos ter o Python instalado na máquina, caso não o tenha instalado siga as instruções no link a seguir <a href="https://www.hashtagtreinamentos.com/como-baixar-python?gclid=Cj0KCQiA_P6dBhD1ARIsAAGI7HBNikzYidO8Df-hIeCEIxotmy4aqcLfHNJDOjypBO_7Lsno2eb21x4aAiY5EALw_wcB">Link</a></p>
      </li>
      <li>
-          <p>Segundo você deve instalar as bibliotecas necessárias para fazer o código funcionar corretamente. Abra o prompt de comando de seu computador e escreva <b>pip install customtkinter</b> como no exemplo abaixo:</p>
+          <p>Segundo, você deve instalar as bibliotecas necessárias para fazer o código funcionar corretamente. Abra o prompt de comando de seu computador e escreva <b>pip install customtkinter</b> como no exemplo abaixo:</p>
           <p align="center">
           <img width="335" alt="Interface-base" src="https://user-images.githubusercontent.com/109704540/212206306-e23f7bbc-6be7-4fa6-8e44-7bdeffd68641.png">
           </p>
+          <p>e deverá repetir o mesmo procedimento para o REQUESTS escrevendo <b>pip install requests</b> e por fim o TKINTER <b>pip install tkinter</b></p>
+     </li>
+     <li>
+          <p>Por ultimo, apenas execute o programa e ele abrirá uma tela semelhante a essa abaixo:</p>
      </li>
 </ul>
 
