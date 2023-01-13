@@ -51,19 +51,30 @@
 <ul>
      <li>
           <p>Ao cliclar em detalhes o programa exibirá todos os dados do banco da FIREBASE</p>
-          <ul align="center">
+          <p align="center">
           <img width="335" alt="Interface-base" src="https://user-images.githubusercontent.com/109704540/212349234-befbaf1e-2170-41fc-a1cb-c7da4c8ab1d1.png">
-          </ul>
+          </p>
      </li>
 </ul>
 
 <ul>
      <li>
           <p>Voltando a janela principal, clicando no incluir novo abrirá uma janela em que você deve inserir as informações do carro novo</p>
-          <ul align="center">
+          <p align="center">
           <img width="335" alt="Incluir-base" src="https://user-images.githubusercontent.com/109704540/212381802-61e5c068-7f1a-4484-a017-534e1ecb76ce.png">
-          </ul>
+          </p>
      </li>
+</ul>
+
+<ul>
+     <li>
+          <p>Voltando a janela principal, ao clicar em atualizar abrirá uma janela como essa abaixo</p>
+               <p align="center">
+               <img width="335" alt="Incluir-base" src="https://user-images.githubusercontent.com/109704540/212382391-c8df89dd-61cd-437e-bfff-ecd7fab9ee28.png">
+               <p align="center">Conseguimos identificar a KEY na janela de <a href="https://user-images.githubusercontent.com/109704540/212349234-befbaf1e-2170-41fc-a1cb-c7da4c8ab1d1.png">detalhes<a/>, onde a primeira informação é a KEY, basta copiar e colar no campo requisitado</p>
+               </p>
+     </li>
+
 </ul>
 em desenvolvimento...
 @pedro_elorriaga
