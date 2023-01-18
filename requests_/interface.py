@@ -1,14 +1,16 @@
-import tkinter
+import tkinter, os, platform
 import customtkinter
-import os
 from app import *
 
-os.system('cls')
+if platform.system() == 'Windows':
+    os.system('cls')
+else:
+    os.system('clear')
+
 customtkinter.set_appearance_mode("system")
 customtkinter.set_default_color_theme("green")
 width = 450
 heigth = 500
-
 
 root = customtkinter.CTk()
 root.geometry(f"{width}x{heigth}+500+200")
