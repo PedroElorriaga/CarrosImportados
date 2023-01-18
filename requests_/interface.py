@@ -1,8 +1,12 @@
-import tkinter, os
+import tkinter, os, platform
 import customtkinter
 from app import *
 
-os.system('cls')
+if platform.system() == 'Windows':
+    os.system('cls')
+else:
+    os.system('clear')
+
 customtkinter.set_appearance_mode("system")
 customtkinter.set_default_color_theme("green")
 width = 450
