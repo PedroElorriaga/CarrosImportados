@@ -1,7 +1,7 @@
 <h1 align="center"> SISTEMA DE DADOS </h1>
 
 <ul align="center">
-     <img src="http://img.shields.io/static/v1?label=VERSION&message=BETA%201.0.0&color=blue&style=for-the-badge">
+     <img src="http://img.shields.io/static/v1?label=VERSION&message=BETA%201.0.1&color=blue&style=for-the-badge">
      <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge">
 </ul>
 
