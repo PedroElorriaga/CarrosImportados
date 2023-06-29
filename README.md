@@ -5,7 +5,7 @@
      <img src="http://img.shields.io/static/v1?label=STATUS&message=WORKING&color=GREEN&style=for-the-badge">
 </ul>
 
-<h2 align="center">Sistema com interface gráfica conectado ao API do firebase</h2>
+<h2 align="center">Sistema com interface gráfica utilizando firebase</h2>
 
 <p align="center">OBS: Isto é apenas para agregar e praticar meus conhecimentos na linguagem, podendo conter erros, quebras de normas, falhas de segurança, entre outras coisas</p>
 
